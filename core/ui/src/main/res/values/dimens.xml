@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="task_list_corner_radius">6dp</dimen>
+    <dimen name="task_details_dialog_radius">16dp</dimen>
+    <dimen name="task_details_icon_margin">64dp</dimen>
+    <dimen name="task_list_loading_spacer_margin">32dp</dimen>
+    <dimen name="divider_thickness">1dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="font_24">24sp</dimen>
+    <dimen name="font_16">16sp</dimen>
+</resources>

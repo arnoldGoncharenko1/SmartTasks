@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartTasks</string>
+    <string name="due_date">Due Date</string>
+    <string name="days_left">Days left</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="retry">Retry</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="task_list_error_message">Task retrieval failed! Please try again later</string>
+    <string name="task_list_next_date_content_description">next date</string>
+    <string name="task_list_last_date_content_description">last date</string>
+    <string name="task_list_today">Today</string>
+    <string name="task_list_no_tasks_today">No tasks for today!</string>
+    <string name="task_list_no_tasks_content_description">no tasks</string>
+    <string name="task_details_loading_description">Loading task, please wait.</string>
+    <string name="task_details_leave_comment_confirmation">Do you want to leave a comment?</string>
+    <string name="task_details_enter_comment">Enter comment</string>
+    <string name="task_details_submit">Submit</string>
+    <string name="task_details_go_back_content_description">go back</string>
+    <string name="task_details_title">Task Detail</string>
+    <string name="task_details_unresolved">Unresolved</string>
+    <string name="task_details_resolved">Resolved</string>
+    <string name="task_details_resolve">Resolve</string>
+    <string name="task_details_cant_resolve">Can\'t resolve</string>
+</resources>
