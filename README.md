@@ -2,7 +2,7 @@
 
 ## Overview
 
-This android application allows any user to see the current avaliable tasks, resolve them, and leave a comment on them if required.
+This android application allows any user to see the current available tasks, resolve them, and leave a comment on them if required.
 
 <table>
   <tr>
@@ -28,7 +28,7 @@ SmartTasks is built using the Model-View-ViewModel (MVVM) architecture pattern, 
 
 ### Modules
 
-- **Data**: Contains all the data classes required for retireving data, such as the task list, task details, and the Room database. Also contains a Util package for dates.
+- **Data**: Contains all the data classes required for retrieving data, such as the task list, task details, and the Room database. Also contains a Util package for dates.
 - **Domain**: Contains usecases to access the Data layer.
 - **Network**: Contains API classes with retrofit integration.
 - **UI**: Contains UI components to be utilized by the feature modules, utilizes Compose. 
@@ -39,12 +39,12 @@ SmartTasks is built using the Model-View-ViewModel (MVVM) architecture pattern, 
 
 - **Jetpack Compose**: For building the UI declaratively.
 - **Retrofit**: For making network requests to the GitHub API.
-- **Kotlin Serilization**: For JSON serialization and deserialization.
+- **Kotlin Serialization**: For JSON serialization and deserialization.
 - **Kotlin Coroutines**: For managing asynchronous operations.
 - **Flow**: For observing data changes in a lifecycle-aware manner.
 - **Jetpack Navigation**: For handling navigation between screens.
 - **Room**: For local SQL database storage.
-- **Hilt**: For dependecy management and injection. 
+- **Hilt**: For dependency management and injection. 
 
 ## Installation
 
@@ -75,14 +75,14 @@ The app uses a single GET call
 
 - The app has no API call to resolve tasks, everything is stored locally. 
 - This limitation is minor, but the task list gets replaced by the new tasks that the API picks up each time the app restarts.
-- The app currently possess basic error handling.
+- The app currently possesses basic error handling
 
 ## Future Enhancements
 
 - **Error Handling**: Add further error handling by showing more user-friendly messages and additional handling for new response types. 
-- **Further API integreation**: Add API calls for resolving the tasks, properly updating it on the backend so results would be consistent. 
+- **Further API integration**: Add API calls for resolving the tasks, properly updating it on the backend so results would be consistent. 
 - **Testing**: Add test coverage for every additional module
 
 ## Conclusion
 
-SmartTasks demonstrates the use of modern Android development practices, including Jetpack Compose, the MVVM architecture, Hilt, Room, and the multi-module approach to organzation.
+SmartTasks demonstrates the use of modern Android development practices, including Jetpack Compose, the MVVM architecture, Hilt, Room, and the multi-module approach to organization.
