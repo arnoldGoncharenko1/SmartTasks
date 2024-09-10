@@ -173,157 +173,14 @@ internal fun TaskDetailsView(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            IconButton(
-                content = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_chevron_left_24),
-                        contentDescription = stringResource(id = R.string.task_details_go_back_content_description),
-                        tint = colorResource(id = R.color.white)
-                    )
-                },
-                onClick = {
-                    navigateBack()
-                }
-            )
-            Text(
-                text = stringResource(id = R.string.task_details_title),
-                color = colorResource(id = R.color.white)
-            )
-            Spacer(modifier = Modifier.fillMaxWidth(0.20f))
-        }
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_16)))
-        Image(
-            painter = painterResource(id = R.drawable.task_details),
-            contentDescription = null,
-            contentScale = ContentScale.FillWidth,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    start = dimensionResource(id = R.dimen.margin_16),
-                    end = dimensionResource(id = R.dimen.margin_16)
-                )
+        TaskDetailsHeaderView(navigateBack)
+        TaskDetailsDetailsView(
+            taskTitle = state.data?.taskTitle.orEmpty(),
+            dueDate = state.data?.dueDate.orEmpty(),
+            daysLeft = state.data?.daysLeft.toString(),
+            description = state.data?.description.orEmpty(),
+            taskState = state.data?.taskState ?: TaskState.UNRESOLVED
         )
-        Surface(
-            shape = RoundedCornerShape(
-                bottomStart = dimensionResource(id = R.dimen.margin_8),
-                bottomEnd = dimensionResource(id = R.dimen.margin_8)
-            ),
-            color = colorResource(id = R.color.white),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    start = dimensionResource(id = R.dimen.margin_16),
-                    end = dimensionResource(id = R.dimen.margin_16)
-                )
-        ) {
-            Column(
-                modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.margin_16))
-            ) {
-                Text(
-                    text = state.data?.taskTitle.orEmpty(),
-                    style = MaterialTheme.typography.displayMedium.copy(
-                        color = determineColor(state.data?.taskState),
-                        fontSize = dimensionResource(id = R.dimen.font_24).value.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                )
-                HorizontalDivider(
-                    color = MaterialTheme.colorScheme.primary,
-                    thickness = dimensionResource(id = R.dimen.divider_thickness),
-                    modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.margin_8))
-                )
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Column {
-                        Text(
-                            text = stringResource(id = R.string.due_date),
-                            style = MaterialTheme.typography.labelSmall.copy(
-                                color = colorResource(id = R.color.grey_yellow)
-                            ),
-                            modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.margin_4))
-                        )
-                        Text(
-                            text = state.data?.dueDate.orEmpty(),
-                            style = MaterialTheme.typography.displayMedium.copy(
-                                color = determineColor(state.data?.taskState),
-                                fontWeight = FontWeight.Bold
-                            )
-                        )
-                    }
-                    Column(horizontalAlignment = Alignment.End) {
-                        Text(
-                            text = stringResource(id = R.string.days_left),
-                            style = MaterialTheme.typography.labelSmall.copy(
-                                color = colorResource(id = R.color.grey_yellow)
-                            ),
-                            modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.margin_4))
-                        )
-                        Text(
-                            text = state.data?.daysLeft.toString(),
-                            style = MaterialTheme.typography.displayMedium.copy(
-                                color = determineColor(state.data?.taskState),
-                                fontWeight = FontWeight.Bold
-                            )
-                        )
-                    }
-                }
-                HorizontalDivider(
-                    color = MaterialTheme.colorScheme.primary,
-                    thickness = dimensionResource(id = R.dimen.divider_thickness),
-                    modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.margin_8))
-                )
-                Text(
-                    text = state.data?.description.orEmpty(),
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        color = colorResource(id = R.color.grey_yellow)
-                    )
-                )
-                HorizontalDivider(
-                    color = MaterialTheme.colorScheme.primary,
-                    thickness = dimensionResource(id = R.dimen.divider_thickness),
-                    modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.margin_8))
-                )
-                when (state.data?.taskState) {
-                    TaskState.UNRESOLVED -> {
-                        Text(
-                            text = stringResource(id = R.string.task_details_unresolved),
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                color = colorResource(id = R.color.unresolved_yellow),
-                                fontWeight = FontWeight.Bold
-                            )
-                        )
-                    }
-
-                    TaskState.RESOLVED -> {
-                        Text(
-                            text = stringResource(id = R.string.task_details_resolved),
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                color = colorResource(id = R.color.resolved_green),
-                                fontWeight = FontWeight.Bold
-                            )
-                        )
-                    }
-
-                    else -> {
-                        Text(
-                            text = stringResource(id = R.string.task_details_unresolved),
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                color = MaterialTheme.colorScheme.secondary,
-                                fontWeight = FontWeight.Bold
-                            )
-                        )
-                    }
-                }
-            }
-        }
 
         when (state.data?.taskState) {
             TaskState.UNRESOLVED -> {
@@ -411,6 +268,171 @@ internal fun TaskDetailsView(
                         contentDescription = null
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.task_details_icon_margin)))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun TaskDetailsHeaderView(navigateBack: () -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        IconButton(
+            content = {
+                Icon(
+                    painter = painterResource(id = R.drawable.baseline_chevron_left_24),
+                    contentDescription = stringResource(id = R.string.task_details_go_back_content_description),
+                    tint = colorResource(id = R.color.white)
+                )
+            },
+            onClick = {
+                navigateBack()
+            }
+        )
+        Text(
+            text = stringResource(id = R.string.task_details_title),
+            color = colorResource(id = R.color.white)
+        )
+        Spacer(modifier = Modifier.fillMaxWidth(0.20f))
+    }
+}
+
+@Composable
+private fun TaskDetailsDetailsView(
+    taskTitle: String,
+    dueDate: String,
+    daysLeft: String,
+    description: String,
+    taskState: TaskState
+) {
+    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_16)))
+    Image(
+        painter = painterResource(id = R.drawable.task_details),
+        contentDescription = null,
+        contentScale = ContentScale.FillWidth,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                start = dimensionResource(id = R.dimen.margin_16),
+                end = dimensionResource(id = R.dimen.margin_16)
+            )
+    )
+    Surface(
+        shape = RoundedCornerShape(
+            bottomStart = dimensionResource(id = R.dimen.margin_8),
+            bottomEnd = dimensionResource(id = R.dimen.margin_8)
+        ),
+        color = colorResource(id = R.color.white),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                start = dimensionResource(id = R.dimen.margin_16),
+                end = dimensionResource(id = R.dimen.margin_16)
+            )
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.margin_16))
+        ) {
+            Text(
+                text = taskTitle,
+                style = MaterialTheme.typography.displayMedium.copy(
+                    color = determineColor(taskState),
+                    fontSize = dimensionResource(id = R.dimen.font_24).value.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            )
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.primary,
+                thickness = dimensionResource(id = R.dimen.divider_thickness),
+                modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.margin_8))
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column {
+                    Text(
+                        text = stringResource(id = R.string.due_date),
+                        style = MaterialTheme.typography.labelSmall.copy(
+                            color = colorResource(id = R.color.grey_yellow)
+                        ),
+                        modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.margin_4))
+                    )
+                    Text(
+                        text = dueDate,
+                        style = MaterialTheme.typography.displayMedium.copy(
+                            color = determineColor(taskState),
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(
+                        text = stringResource(id = R.string.days_left),
+                        style = MaterialTheme.typography.labelSmall.copy(
+                            color = colorResource(id = R.color.grey_yellow)
+                        ),
+                        modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.margin_4))
+                    )
+                    Text(
+                        text = daysLeft,
+                        style = MaterialTheme.typography.displayMedium.copy(
+                            color = determineColor(taskState),
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+            }
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.primary,
+                thickness = dimensionResource(id = R.dimen.divider_thickness),
+                modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.margin_8))
+            )
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodySmall.copy(
+                    color = colorResource(id = R.color.grey_yellow)
+                )
+            )
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.primary,
+                thickness = dimensionResource(id = R.dimen.divider_thickness),
+                modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.margin_8))
+            )
+            when (taskState) {
+                TaskState.UNRESOLVED -> {
+                    Text(
+                        text = stringResource(id = R.string.task_details_unresolved),
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = colorResource(id = R.color.unresolved_yellow),
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+
+                TaskState.RESOLVED -> {
+                    Text(
+                        text = stringResource(id = R.string.task_details_resolved),
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = colorResource(id = R.color.resolved_green),
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+
+                else -> {
+                    Text(
+                        text = stringResource(id = R.string.task_details_unresolved),
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = MaterialTheme.colorScheme.secondary,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
                 }
             }
         }
