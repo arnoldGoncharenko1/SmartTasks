@@ -38,7 +38,7 @@ SmartTasks is built using the Model-View-ViewModel (MVVM) architecture pattern, 
 ## Libraries Used
 
 - **Jetpack Compose**: For building the UI declaratively.
-- **Retrofit**: For making network requests to the GitHub API.
+- **Retrofit**: For making network requests to the mocked API.
 - **Kotlin Serialization**: For JSON serialization and deserialization.
 - **Kotlin Coroutines**: For managing asynchronous operations.
 - **Flow**: For observing data changes in a lifecycle-aware manner.
