@@ -74,7 +74,7 @@ The app uses a single GET call
 ## Known Issues and Limitations
 
 - The app has no API call to resolve tasks, everything is stored locally. 
-- This limitation is minor, but the task list gets replaced by the new tasks that the API picks up each time the app restarts.
+- This limitation is minor, but each time the app restarts, the task list is replaced with new tasks retrieved by the API.
 - The app currently possesses basic error handling
 
 ## Future Enhancements
