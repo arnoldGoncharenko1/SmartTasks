@@ -81,7 +81,7 @@ The app uses a single GET call
 
 - **Error Handling**: Add further error handling by showing more user-friendly messages and additional handling for new response types. 
 - **Further API integration**: Add API calls for resolving the tasks, properly updating it on the backend so results would be consistent. 
-- **Testing**: Add test coverage for every additional module
+- **Testing**: Add test coverage for every module
 
 ## Conclusion
 
